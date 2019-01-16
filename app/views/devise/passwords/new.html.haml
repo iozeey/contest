@@ -1,0 +1,15 @@
+.devise-dialog-wrapper
+  .modal-dialog.devise-dialog
+    .modal-content.window-shadow
+      .modal-header
+        %h1.text-center.font-shadow.fw-br Reset password?
+      .modal-body
+        .mx-auto
+          .col-xs-12
+            = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+              = devise_error_messages!
+              .form-group
+                = f.email_field :email, autofocus: true, :required => true, class: "form-control", placeholder: "Your email"
+              .form-group
+                = f.submit "Reset", class: "btn btn-primary btn-block btn-lg"
+              = render "devise/shared/links"

@@ -1,0 +1,31 @@
+.devise-dialog-wrapper
+  .modal-dialog.devise-dialog
+    .modal-content.window-shadow
+      .modal-header
+        %h1.text-center.font-shadow.fw-br
+          Edit #{resource_name.to_s.humanize}
+      .modal-body
+        .mx-auto
+          .col-xs-12
+            = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+              = devise_error_messages!
+              .form-group
+                = f.text_field :first_name, :required => true, autofocus: true, class: "form-control", placeholder: "First name"
+              .form-group
+                = f.text_field :last_name, :required => true, autofocus: true, class: "form-control", placeholder: "Last name"
+              .form-group
+                = f.email_field :email, :required => true, autofocus: true, class: "form-control", placeholder: "you@example.com"
+              - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+                %div
+                  Currently waiting confirmation for: #{resource.unconfirmed_email}
+              .form-group
+                = f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "New Password"
+              .form-group
+                = f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "Repeat New Password"
+              .form-group
+                = f.password_field :current_password, autocomplete: "off", class: "form-control", placeholder: "Current Password"
+              .form-group
+                = f.submit "Update", class: "btn btn-primary btn-block"
+            .form-group
+              %p
+                = button_to "Unhappy? Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger btn-block"
