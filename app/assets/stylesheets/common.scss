@@ -18,3 +18,14 @@
         }
     }
 }
+.nav-company-styles{
+	background-color: rgb(139, 42, 141);
+	background-image: radial-gradient(100% 76% at 0% 0%, rgb(205, 60, 35) 0%, rgba(161, 107, 87, 0) 100%);
+	.navbar-brand, .nav-link, a, button{
+		color: white !important;
+	}
+}
+
+.no-border{
+	border: none;
+}

@@ -22,4 +22,23 @@ User.create([
 		{first_name: "king", last_name: "jack", email: "king@gmail.com", password: '123123', password_confirmation: '123123'},
 		{first_name: "king", last_name: "jack", email: "kingg@gmail.com", password: '123123', password_confirmation: '123123'},
 		{first_name: "joe", last_name: "root", email: "root@gmail.com", password: '123123', password_confirmation: '123123'}])
+
+# create contest and questions
+5.times.each do |i|
+
+	questions = [
+		{question: "What is 1+1?",answer: 2,instructions:"Hints use your mind :)"},
+		{question: "What is 1+1?",answer: 2,instructions:"Hints use your mind :)"},
+		{question: "What is 1+1?",answer: 2,instructions:"Hints use your mind :)"}
+	]
+
+	Contest.create!(
+		{ name: "Contest-#{i}",
+			instructions: "Instruction goes here for contest- #{i}",
+			user: admin,
+			questions_attributes: questions
+		}
+		)
+end
+
 end

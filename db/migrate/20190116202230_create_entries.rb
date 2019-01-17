@@ -3,6 +3,7 @@ class CreateEntries < ActiveRecord::Migration[5.2]
     create_table :entries do |t|
       t.references :user, foreign_key: true
       t.references :question, foreign_key: true
+      t.string :answer
 
       t.timestamps
     end

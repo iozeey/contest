@@ -1,0 +1,13 @@
+-if notice
+  %p.notice.alert.alert-success= notice
+-if alert && alert.kind_of?(Array)
+  #error_explanation
+    %h2
+      = pluralize(alert.count, "error")
+      prohibited from being saved:
+    %ul
+      - alert.each do |message|
+        %li= message
+- else
+  -if alert
+    %p.alert.alert-danger= alert

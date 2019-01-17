@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2019_01_16_211156) do
   create_table "entries", force: :cascade do |t|
     t.integer "user_id"
     t.integer "question_id"
+    t.string "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_entries_on_question_id"

@@ -1,31 +1,68 @@
-<p id="notice"><%= notice %></p>
+<div class="">
+  <%= image_tag "fly-contests-inspiration.jpg" , class: 'img-thumbnail no-border h-60'%>
+</div>
 
-<h1>Contests</h1>
+<div id="accordion">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Instructions</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <% @contests.each do |contest| %>
 
-  <tbody>
-    <% @contests.each do |contest| %>
-      <tr>
-        <td><%= contest.name %></td>
-        <td><%= contest.instructions %></td>
-        <td><%= contest.user %></td>
-        <td><%= link_to 'Show', contest %></td>
-        <td><%= link_to 'Edit', edit_contest_path(contest) %></td>
-        <td><%= link_to 'Destroy', contest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <div class="card mt-4">
+      <div class="card-header" id="heading<%= contest.id %>">
+        <div class="col-12 d-flex">
 
-<br>
+          <span class="col-12 flex-fill text-left mb-0" data-toggle="collapse" data-target="#collapse<%= contest.id %>" aria-expanded="true" aria-controls="collapseOne">
+            <%= contest.name %>
+          </span>
 
-<%= link_to 'New Contest', new_contest_path %>
+          <span class="col-6 flex-fill text-right mb-0">
+            <%= link_to "Contest Rules", "/rules.pdf" %>
+          </span>
+
+        </div>
+      </div>
+
+      <div id="collapse<%= contest.id %>" class="collapse show" aria-labelledby="heading<%= contest.id %>" data-parent="#accordion">
+        <div class="card-body">
+          <% contest.questions.each do |question|%>
+
+          <div class="container">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#home<%= question.id %>">Solve</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu<%= question.id %>">Hints</a>
+              </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content text-center">
+              <div id="home<%= question.id %>" class="container tab-pane active"><br>
+                <h3><%= question.question %></h3>
+                <%= form_with(model: Entry.new, local: true) do |form| %>
+
+                  <%= form.hidden_field :question_id, value: question.id %>
+
+                  <div class="form-group">
+                    <%= form.text_field :answer, placeholder: "answer here", class: 'form-control' %>
+                  </div>
+
+                  <div class="actions">
+                    <%= form.submit "Submit", class: 'btn btn-primary'%>
+                  </div>
+
+                <% end %>
+              </div>
+              <div id="menu<%= question.id %>" class="container tab-pane fade"><br>
+                <p><%= question.instructions %></p>
+              </div>
+            </div>
+          </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+</div>

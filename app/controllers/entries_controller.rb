@@ -25,13 +25,24 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @entry = Entry.new(entry_params)
-
+    @entry.user_id = current_user.id if current_user
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to @entry, notice: 'Entry was successfully created.' }
+        format.html {
+          redirect_to Contest.new, notice: 'Answer was successfully submitted'
+        }
         format.json { render :show, status: :created, location: @entry }
       else
-        format.html { render :new }
+
+        errors = []
+
+        if @entry.errors.any?
+          @entry.errors.full_messages.each do |message|
+            errors << message
+          end
+        end
+
+        format.html { redirect_to Contest.new, alert: errors }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
       end
     end
@@ -40,9 +51,10 @@ class EntriesController < ApplicationController
   # PATCH/PUT /entries/1
   # PATCH/PUT /entries/1.json
   def update
+    raise 1
     respond_to do |format|
       if @entry.update(entry_params)
-        format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
+        format.html { redirect_to @entry, notice: 'Answer was successfully updated.' }
         format.json { render :show, status: :ok, location: @entry }
       else
         format.html { render :edit }
@@ -56,7 +68,7 @@ class EntriesController < ApplicationController
   def destroy
     @entry.destroy
     respond_to do |format|
-      format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
+      format.html { redirect_to entries_url, notice: 'Answer was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +81,6 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:user_id, :question_id)
+      params.require(:entry).permit(:user_id, :question_id, :answer)
     end
 end

@@ -1,25 +1,18 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  %a.navbar-brand{href: "#"} Fly contests
+%nav.navbar.navbar-expand-lg.navbar-light.nav-company-styles
+  %a.navbar-brand{href: "#"} Fly.me
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", type: "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
       %li.nav-item.active
-        %a.nav-link{href: "#"}
+        %a.nav-link{href: "/"}
           Home
-          %span.sr-only (current)
+          %span.sr-only
       %li.nav-item
-        %a.nav-link{href: "#"} Contests
+        %a.nav-link{href: "/contests"} Contests
+    %ul.navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
       - if user_signed_in?
-        %li.nav-item.dropdown
-          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
-            Profile
-          .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
-            %a.dropdown-item{href: "#"} Settings
-            = link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item"
+        %li
+        = link_to "#{current_user.name} Logout", destroy_user_session_path, method: :delete, class: "nav-link"
       - else
         %li= link_to "Login", new_user_session_path, class: "nav-link"
-
-    %form.form-inline.my-2.my-lg-0
-      %input.form-control.mr-sm-2{"aria-label" => "Search", placeholder: "Search", type: "search"}/
-      %button.btn.btn-outline-success.my-2.my-sm-0{type: "submit"} Search
