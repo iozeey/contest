@@ -3,8 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
-  # before_action :update_sanitized_params, if: :devise_controller?
-
+  
   # GET /resource/sign_up
   # def new
   #   super
@@ -53,9 +52,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(resource)
     edit_user_registration_path(resource)
   end
-  
+
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update,keys: [:first_name, :last_name])
+    attributes = [:first_name, :last_name]
+    attributes << [:password, :password_confirmation, :current_password] if !params[:current_password].blank?
+    attributes.flatten!
+    devise_parameter_sanitizer.permit(:account_update,keys: attributes)
   end
 
   # def update_sanitized_params
