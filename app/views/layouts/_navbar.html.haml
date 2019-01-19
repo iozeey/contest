@@ -12,7 +12,7 @@
         %a.nav-link{href: "/contests"} Contests
     %ul.navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
       - if user_signed_in?
-        %li
-        = link_to "#{current_user.name} Logout", destroy_user_session_path, method: :delete, class: "nav-link"
+        %li.nav-item= link_to("#{current_user.name}", edit_user_registration_path, class: "nav-link")
+        %li.nav-item= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link"
       - else
         %li= link_to "Login", new_user_session_path, class: "nav-link"
