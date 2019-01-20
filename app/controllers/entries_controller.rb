@@ -25,6 +25,7 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @entry = Entry.new(entry_params)
+    authorize @entry
     @entry.user_id = current_user.id if current_user
     respond_to do |format|
       if @entry.save
@@ -51,7 +52,6 @@ class EntriesController < ApplicationController
   # PATCH/PUT /entries/1
   # PATCH/PUT /entries/1.json
   def update
-    raise 1
     respond_to do |format|
       if @entry.update(entry_params)
         format.html { redirect_to @entry, notice: 'Answer was successfully updated.' }

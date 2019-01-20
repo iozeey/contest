@@ -13,4 +13,12 @@ class User < ApplicationRecord
   def name
     "#{self.first_name} #{self.last_name}"
   end
+
+  def admin?
+    self.has_role? :admin
+  end
+
+  def user?
+    self.has_role? :user
+  end
 end

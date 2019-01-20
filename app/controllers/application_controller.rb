@@ -12,4 +12,13 @@ class ApplicationController < ActionController::Base
 	    flash[:alert] = "Unauthorized access"
 	    redirect_to(request.referrer || root_path)
 	end
+
+	def authenticate_user
+		raise SecurityError unless current_user.admin?
+	end
+
+	rescue_from SecurityError do |exception|
+  	redirect_to root_url
+	end
+
 end
