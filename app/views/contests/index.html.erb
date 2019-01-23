@@ -39,7 +39,7 @@
             <div class="tab-content text-center">
               <div id="home<%= question.id %>" class="container tab-pane active"><br>
                 <h3><%= question.question %></h3>
-                <%= form_with(model: Entry.new, local: true) do |form| %>
+                <%= form_with(model: Entry.new, class: 'entry_form') do |form| %>
 
                   <%= form.hidden_field :question_id, value: question.id %>
 

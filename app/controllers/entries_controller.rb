@@ -32,7 +32,10 @@ class EntriesController < ApplicationController
         format.html {
           redirect_to Contest.new, notice: 'Answer was successfully submitted'
         }
-        format.json { render :show, status: :created, location: @entry }
+        format.json {
+          @notice = 'Answer was successfully submitted'
+          render :show, status: :created, location: @entry
+        }
       else
 
         errors = []
@@ -44,7 +47,9 @@ class EntriesController < ApplicationController
         end
 
         format.html { redirect_to Contest.new, alert: errors }
-        format.json { render json: @entry.errors, status: :unprocessable_entity }
+        format.json {
+          render json: errors, status: :unprocessable_entity
+        }
       end
     end
   end

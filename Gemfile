@@ -69,3 +69,5 @@ gem 'rolify'
 gem 'pundit'
 gem 'activeadmin'
 gem 'inherited_resources'
+# show notification using jquery
+gem 'toastr-rails'
