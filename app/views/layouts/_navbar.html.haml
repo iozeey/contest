@@ -15,4 +15,5 @@
         %li.nav-item= link_to("#{current_user.name}", edit_user_registration_path, class: "nav-link")
         %li.nav-item= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link"
       - else
+        %li= link_to "Register", new_user_registration_path, class: "nav-link"
         %li= link_to "Login", new_user_session_path, class: "nav-link"
